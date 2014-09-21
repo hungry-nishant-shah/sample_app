@@ -6,6 +6,8 @@ class StaticPagesController < ApplicationController
   end
 
   def about
-  	x=10
+  end
+
+  def contact
   end
 end
