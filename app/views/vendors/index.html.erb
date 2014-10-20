@@ -1,0 +1,36 @@
+<% provide(:title, 'All vendors') %>
+<h1>All vendors</h1>
+
+<%= form_tag(vendors_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :what, params[:what], placeholder: "Find" %>
+  <%= text_field_tag :where, params[:where], placeholder: "Near" %>
+  Delivery: <%= check_box("delivery","true")%>
+  <br>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<%= link_to "Sort by cost", vendors_path(params.merge(:sort_by_expensiveness => 1)) %>
+<br>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <% @vendors.each do |vendor| %>
+    <li>
+      Name: <%= link_to vendor.name, vendor_path(vendor) if !vendor.nil?%>
+      <br>
+      Address: <%= vendor.address if !vendor.nil?%>
+      <br>
+      Price: <%= vendor.expensiveness if !vendor.nil? %>
+      <br>
+      <% if !vendor.specialities.empty? %>
+        <% specialities = vendor.specialities %>
+        <% specialities.each do |speciality| %>
+            <%= link_to speciality.name, vendors_path %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

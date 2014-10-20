@@ -1,10 +1,52 @@
 SampleApp::Application.routes.draw do
   
+  get "carts/show"
+  get "carts/destroy"
+  get "cart_items/new"
+  get "cart_items/create"
+  get "cart_items/show"
+  post "cart_items/destroy"
+  post "cart_items/delete_one_item"
+  get "cart_items/index"
+  get "specialities/new"
+  get "specialities/create"
+  get "specialities/show"
+  get "specialities/index"
+  get "specialities/destroy"
+  get "items/new"
+  get "items/create"
+  get "items/show"
+  get "items/index"
+  get "items/destroy"
+  #get "menus/new"
+  #get "menus/create"
+  #get "menus/show"
+  #get "menus/index"
+  #get "menus/destroy"
+  get "vendors/new"
+  get "vendors/create"
+  get "vendors/show"
+  get "vendors/index"
+  get "vendors/destroy"
   root "static_pages#home"
   
-  resources :users
+  resources :carts
+  resources :users do
+    resources :carts, only: [:show, :destroy, :clear]
+  end
   resources :sessions, only: [:new, :create, :destroy]
-  
+  resources :microposts, only: [:create, :destroy]
+  resources :vendors do 
+    resources :menus do
+      resources :items do
+        resources :cart_items
+      end
+    end
+    resources :specialities
+  end
+
+  resources :specialities
+
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'

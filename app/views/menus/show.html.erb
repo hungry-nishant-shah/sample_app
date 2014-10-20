@@ -1,0 +1,10 @@
+<% provide(:title, @vendor.name) %>
+<div class="row">
+  <div class="span8">
+      <h3>Items (<%= @items.count %>)</h3>
+      <ol class="microposts">
+        <%= render @items %>
+      </ol>
+  </div>
+
+</div>

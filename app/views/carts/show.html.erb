@@ -1,0 +1,32 @@
+<% provide(:title, "") %>
+<div class="row">
+  <div class="span8">
+      <% total_cost = 0 %>
+      <h3>Items (<%= @cart.cart_items.count %>)</h3>
+      <ol>
+        
+        <% @cart.cart_items.each do |x| %>
+          <li>
+            Name: <%= x.item.name %> <br>
+            Price: <%= x.item.price %>
+            <%= button_to "Remove from cart",cart_items_delete_one_item_path(:item_id => x.item.id )%>
+            <% total_cost+=x.item.price %>
+          </li>
+        <% end %>
+
+        <br><br>
+
+        Total Price: <%= total_cost %>
+        
+        <br><br>
+
+        <% if !current_user.nil? %>
+          <%= button_to "Checkout", "#", class: "btn" %>
+          <%= button_to "Clear Cart", cart_items_destroy_path, class: "btn btn-primary" %>
+        <% else %>
+          <%= button_to "Sign And Checkout", "#" %>
+        <% end %>
+      </ol>
+  </div>
+
+</div>

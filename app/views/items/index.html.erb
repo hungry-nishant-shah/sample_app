@@ -1,0 +1,9 @@
+<% provide(:title, 'All items') %>
+<h1>All items </h1>
+
+  <% @items.each do |item| %>
+    
+     <%= link_to item.name, vendor_menu_item_path(:id => item.id) %>
+     <%= button_to 'Add to cart', vendor_menu_item_cart_items_path(:item_id => item.id), class: "btn btn-primary" %>
+    
+  <% end %>

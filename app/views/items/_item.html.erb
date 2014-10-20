@@ -1,0 +1,7 @@
+<li>
+  <span class="content"><%= item.name %></span>
+  <span class="timestamp">
+    Price: <%= item.price %>
+    <%= link_to item.name, vendor_menu_item_path(:menu_id => params[:id], :id => item.id)%>
+  </span>
+</li>

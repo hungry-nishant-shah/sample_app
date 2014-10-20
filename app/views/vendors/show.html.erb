@@ -1,0 +1,25 @@
+<% provide(:title, @vendor.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        Vendor Name: <%= @vendor.name %>
+        <br>
+        <br>
+        <%= link_to "Menu", vendor_menu_path(:vendor_id => params[:id], :id => @menu.id) if @menu != nil %>
+        <br>
+        <br>
+        Average Cost: <%= @vendor.expensiveness%>
+        <br>
+        <br>
+        Address : <%= @vendor.address %>
+        <br>
+        <br>
+        Map: <br> <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@vendor.latitude}%2C#{@vendor.longitude}" %>
+        <br>
+        <br>
+        Photos: <br> <%= image_tag @vendor.image_url.to_s %>
+      </h1>
+    </section>
+  </aside>
+</div>
